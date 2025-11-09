@@ -1,0 +1,22 @@
+filmes = []
+
+with open("filmes.txt", "r", encoding="utf-8") as arquivo:
+    for linha in arquivo:
+        ano, nome = linha.strip().split(",")
+        while True:
+            try:
+                nota = float(input(f'Dê uma nota de 0 a 10 para "{nome}": '))
+                if 0 <= nota <= 10:
+                    break
+                else:
+                    print("Nota inválida! Digite entre 0 e 10.")
+            except ValueError:
+                print("Digite um número válido.")
+        filmes.append(f"{ano},{nome},{nota}\n")
+
+with open("filmes_avaliacao.txt", "w", encoding="utf-8") as arquivo:
+    for f in filmes:
+        arquivo.write(f)
+
+print("Arquivo 'filmes_avaliacao.txt' criado com sucesso!")
+
